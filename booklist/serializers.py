@@ -14,5 +14,5 @@ class BookCreateSerializer(serializers.ModelSerializer):
         model = Book
         fields = [
             "title", "language_book", "published_date", "isbn13_number",
-                  "page_number", "created", "authors_name", "link_book_cover", "updated"
+            "page_number", "authors_name", "link_book_cover"
         ]

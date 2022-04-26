@@ -1,0 +1,30 @@
+{% extends 'booklist/base.html' %}
+
+{% block content %}
+
+<h1>Title:{{ object.title }}</h1>
+        <ul>
+                <li>
+                    language_book: {{object.language_book}}
+                </li>
+                <li>
+                    isbn13_number: {{ object.isbn13_number }}
+                </li>
+                <li>
+                    published_date: {{object.published_date}}
+                </li>
+                 <li>
+                    authors_name: {{object.authors_name}}
+                </li>
+                <li>
+                    page_number: {{object.page_number}}
+                </li>
+                <li>
+                    link_book_cover: {{object.link_book_cover}}
+                </li>
+        </ul>
+
+        <a href="{% url 'booklist:book_update' object.id %}">Update</a>
+
+
+{% endblock %}

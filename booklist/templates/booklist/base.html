@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>book list app</title>
+    </head>
+    <body>
+        <div>
+          <a href="{% url 'booklist:book-import' %}">
+                    Import new books</a>
+        </div>
+        <div>
+          <a href="{% url 'booklist:book-create-manually' %}">
+                    Add book manually </a>
+        </div>
+        <div>
+          <a href="{% url 'booklist:index' %}">Book List APP home page</a>
+        </div>
+        <main>
+            <div>
+                <div>
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

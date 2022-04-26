@@ -1,0 +1,42 @@
+{% extends 'booklist/base.html' %}
+
+
+{% block content %}
+
+    {% if message %}
+        message:
+        <p>{{message}}</p>
+    {% endif %}
+
+    {% if booklist %}
+        <ul>
+            {% for book in booklist %}
+                <li> <h4>{{book.title}}</h4></li>
+{#                <a href="{% url 'booklist:book_detail' book.id %}" > Detail</a>#}
+{#                <a href="{% url 'booklist:book_update' book.id %}" > Update</a>#}
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>No books are available.</p>
+    {% endif %}
+
+    <div >
+        <span >
+            {% if page_obj.has_previous %}
+                <a href="?page=1">first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span >
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}"></a>
+
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'booklist/base.html' %}
+
+{% block content %}
+
+    {% if error_message %}
+
+        <strong style="color:#C25100;">Error:</strong> <br>
+        {{error_message}}<br><br><br>
+        <fieldset>
+            <form method="POST">
+                {% csrf_token %}
+                <label>Import title of book: </label><br>
+                <input type="text" name="phrase">
+                <button type="submit">Send</button>
+            </form>
+        </fieldset>
+        <br><br>
+    {% endif %}
+    <div>
+        <strong style="color:#C25100;">Menu:<br></strong>
+        <li>
+            <a href="{% url 'booklist:index' %}">go home-page</a><br>
+        </li>
+        <li>
+            <a href="{% url 'booklist:book-import' %}">Try again</a><br>
+        </li>
+    </div>
+
+{% endblock %}

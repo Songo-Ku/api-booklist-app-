@@ -1,0 +1,15 @@
+{% extends 'booklist/base.html' %}
+
+{% block content %}
+
+    <fieldset>
+        <form method="POST">
+            {% csrf_token %}
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <label>Import title of book: </label><br>
+            <input type="text" name="phrase">
+            <button type="submit">Send</button>
+        </form>
+    </fieldset>
+
+{% endblock %}

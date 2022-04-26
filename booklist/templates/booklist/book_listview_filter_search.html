@@ -1,0 +1,88 @@
+{% extends 'booklist/base.html' %}
+
+{% block title %}
+  Booklist filter search order
+{% endblock title %}
+
+
+
+{% block content %}
+
+
+
+        <form method="GET">
+            <h1>Books Search title/language/pagenumber order </h1>
+            <div class="i-am-centered">
+                {% if search_field_found %}
+                    <p>Record for search phrase {{search_field_found}}</p>
+                {% endif %}
+                {{ form_search.as_p }}
+                <button type="submit">Search</button>
+            </div>
+            <br>
+            <h1>Books filter order </h1>
+            <div>
+                {{ form.as_p }}
+                <button type="submit">Filter</button>
+            </div>
+        </form>
+
+<br>
+
+    {% if object_list %}
+        <div>
+            <table>
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">title</th>
+                    <th scope="col">created</th>
+                    <th scope="col">language</th>
+                    <th scope="col">authors</th>
+                    <th scope="col">pages</th>
+                    <th scope="col">isbn</th>
+                    <th scope="col">published</th>
+                    <th scope="col">go to book detail</th>
+                  </tr>
+                </thead>
+            {% for book in object_list %}
+                <tbody>
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.created |date:"Y-m-d" }}</td>
+                    <td>{{ book.language_book }}</td>
+                    <td>{{ book.authors_name }}</td>
+                    <td>{{ book.page_number }}</td>
+                    <td>{{ book.isbn13_number }}</td>
+                    <td>{{ book.published_date }}</td>
+                    <td><a href="{% url 'booklist:book_detail' book.id %}">{{ book.title }}</a></td>
+                  </tr>
+                </tbody>
+            {% endfor %}
+            </table>
+        </div>
+
+    {% endif %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1&{{ parameters }}">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}&{{ parameters }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&{{ parameters }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&{{ parameters }}">last &raquo;</a>
+
+            {% endif %}
+        </span>
+    </div>
+
+
+{% endblock %}
